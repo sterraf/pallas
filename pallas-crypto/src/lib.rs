@@ -1,4 +1,7 @@
-extern crate core;
+#![no_std]
+
+#[macro_use]
+extern crate alloc;
 
 pub mod hash;
 pub mod key;
