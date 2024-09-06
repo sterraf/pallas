@@ -3,6 +3,7 @@
 //! Handcrafted, idiomatic rust artifacts based on based on the [Alonzo CDDL](https://github.com/input-output-hk/cardano-ledger/blob/master/eras/alonzo/test-suite/cddl-files/alonzo.cddl) file in IOHK repo.
 
 use serde::{Deserialize, Serialize};
+use core::{fmt, hash::Hash as StdHash, ops::Deref};
 
 use pallas_codec::minicbor::{self, data::Tag, Decode, Encode};
 
@@ -14,6 +15,11 @@ pub use crate::{
     Port, PositiveInterval, ProtocolVersion, RationalNumber, Relay, RewardAccount, ScriptHash,
     StakeCredential, TransactionIndex, TransactionInput, UnitInterval, VrfCert, VrfKeyhash,
 };
+// FIXME: required for derive attrs to work
+// use pallas_codec::minicbor;
+
+use alloc::string::String;
+use alloc::vec::Vec;
 
 #[derive(Serialize, Deserialize, Encode, Decode, Debug, PartialEq, Eq, Clone)]
 pub struct HeaderBody {

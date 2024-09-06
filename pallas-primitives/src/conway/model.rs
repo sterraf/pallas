@@ -2,6 +2,14 @@
 //!
 //! Handcrafted, idiomatic rust artifacts based on based on the [Conway CDDL](https://github.com/IntersectMBO/cardano-ledger/blob/master/eras/conway/impl/cddl-files/conway.cddl) file in IntersectMBO repo.
 
+// no std:
+use core::clone;
+use alloc::string::String;
+use alloc::vec::Vec;
+use alloc::boxed::Box;
+use core::ops::Deref;
+
+use pallas_codec::minicbor::decode::Error;
 use serde::{Deserialize, Serialize};
 
 use pallas_codec::minicbor::{self, Decode, Encode};
@@ -1515,7 +1523,8 @@ use crate::babbage::MintedHeader;
 #[derive(Serialize, Deserialize, Encode, Decode, Debug, PartialEq, Clone)]
 pub struct PseudoBlock<T1, T2, T3, T4>
 where
-    T4: std::clone::Clone,
+    // T4: std::clone::Clone,
+    T4: clone::Clone,
 {
     #[n(0)]
     pub header: T1,
@@ -1582,9 +1591,12 @@ impl<'b> From<MintedBlock<'b>> for Block {
 #[derive(Clone, Serialize, Deserialize, Encode, Decode, Debug)]
 pub struct PseudoTx<T1, T2, T3>
 where
-    T1: std::clone::Clone,
-    T2: std::clone::Clone,
-    T3: std::clone::Clone,
+    // T1: std::clone::Clone,
+    // T2: std::clone::Clone,
+    // T3: std::clone::Clone,
+    T1: clone::Clone,
+    T2: clone::Clone,
+    T3: clone::Clone,
 {
     #[n(0)]
     pub transaction_body: T1,
