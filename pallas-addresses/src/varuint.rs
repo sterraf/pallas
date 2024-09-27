@@ -1,8 +1,10 @@
 //! Decode / encode variable-length uints
 
-use std::io::{Cursor, Read, Write};
+// use std::io::{Cursor, Read, Write};
+use core2::io::{Cursor, Read, Write};
+use alloc::vec::Vec;
 
-use thiserror::Error;
+use thiserror_no_std::Error;
 
 #[derive(Error, Debug)]
 pub enum Error {

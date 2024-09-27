@@ -7,13 +7,23 @@
 //!
 //! For more information regarding Cardano addresses and their formats, please refer to [CIP-19](https://cips.cardano.org/cips/cip19/).
 
+#![no_std]
+
+#[macro_use]
+extern crate alloc;
+
 pub mod byron;
 pub mod varuint;
 
-use std::{fmt::Display, io::Cursor, str::FromStr};
+// use std::{fmt::Display, io::Cursor, str::FromStr};
+use alloc::vec::Vec;
+use alloc::string::String;
+use alloc::borrow::ToOwned;
+use core::{fmt, fmt::Display, str::FromStr};
+use core2::io::Cursor;
 
 use pallas_crypto::hash::Hash;
-use thiserror::Error;
+use thiserror_no_std::Error;
 
 #[derive(Error, Debug)]
 pub enum Error {
@@ -691,7 +701,7 @@ impl Address {
 }
 
 impl Display for Address {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Address::Byron(x) => f.write_str(&x.to_base58()),
             Address::Shelley(x) => f.write_str(&x.to_bech32().unwrap_or_else(|_| x.to_hex())),
