@@ -28,6 +28,8 @@ use pallas_primitives::{
 use pallas_traverse::{
     time::Slot, wellknown::GenesisValues, ComputeHash, Era, MultiEraInput, MultiEraOutput,
 };
+use core::{cmp::max, ops::Deref};
+use alloc::vec::Vec;
 
 use std::{cmp::max, collections::HashMap, ops::Deref};
 // TODO: remove when fixed missing args

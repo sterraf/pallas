@@ -20,8 +20,9 @@ use pallas_primitives::{
     UnitInterval, VrfKeyhash,
 };
 use pallas_traverse::{time::Slot, MultiEraInput, MultiEraOutput};
-use std::collections::HashMap;
-use std::ops::Deref;
+use hashbrown::HashMap;
+use core::ops::Deref;
+use alloc::vec::Vec;
 pub use validation::*;
 
 pub type UTxOs<'b> = HashMap<MultiEraInput<'b>, MultiEraOutput<'b>>;
