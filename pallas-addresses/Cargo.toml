@@ -15,9 +15,10 @@ hex = { version="0.4.3", default_features = false }
 pallas-crypto = { version = "=0.31.0", path = "../pallas-crypto" }
 pallas-codec = { version = "=0.31.0", path = "../pallas-codec" }
 base58 = "0.2.0"
-bech32 = "0.9.1"
+bech32-no_std = { version = "0.7.3", default_features = false }
+# thiserror = "1.0.31"
 thiserror-no-std = "2.0.2"
 
 crc = "3.0.1"
 cryptoxide = "0.4"
-core2 = "0.4.0"
+core2 = { version = "0.4.0", default_features = false }
