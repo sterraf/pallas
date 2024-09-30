@@ -22,6 +22,8 @@ use alloc::borrow::ToOwned;
 use core::{fmt, fmt::Display, str::FromStr};
 use core2::io::Cursor;
 
+use bech32_no_std as bech32;
+
 use pallas_crypto::hash::Hash;
 use thiserror_no_std::Error;
 
@@ -107,10 +109,12 @@ impl Pointer {
     }
 
     pub fn to_vec(&self) -> Vec<u8> {
-        let mut cursor = Cursor::new(vec![]);
-        varuint::write(&mut cursor, self.0);
-        varuint::write(&mut cursor, self.1);
-        varuint::write(&mut cursor, self.2);
+        // FIXME: WORKAROUND TO COMPILE WITH no_std
+        let cursor = Cursor::new(vec![]);
+        // let mut cursor = Cursor::new(vec![]);
+        // varuint::write(&mut cursor, self.0);
+        // varuint::write(&mut cursor, self.1);
+        // varuint::write(&mut cursor, self.2);
 
         cursor.into_inner()
     }
@@ -310,11 +314,13 @@ pub enum Address {
 
 fn encode_bech32(addr: &[u8], hrp: &str) -> Result<String, Error> {
     let base32 = bech32::ToBase32::to_base32(&addr);
-    bech32::encode(hrp, base32, bech32::Variant::Bech32).map_err(Error::BadBech32)
+    // bech32::encode(hrp, base32, bech32::Variant::Bech32).map_err(Error::BadBech32)
+    bech32::encode(hrp, base32).map_err(Error::BadBech32)
 }
 
 fn decode_bech32(bech32: &str) -> Result<(String, Vec<u8>), Error> {
-    let (hrp, addr, _) = bech32::decode(bech32).map_err(Error::BadBech32)?;
+    // let (hrp, addr, _) = bech32::decode(bech32).map_err(Error::BadBech32)?;
+    let (hrp, addr) = bech32::decode(bech32).map_err(Error::BadBech32)?;
     let base10 = bech32::FromBase32::from_base32(&addr).map_err(Error::BadBech32)?;
     Ok((hrp, base10))
 }
