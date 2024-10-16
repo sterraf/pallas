@@ -18,13 +18,16 @@ authors = [
 default = []
 
 [dependencies]
-hex = { version="0.4.3", default-features = false }
+hex = { version = "0.4.3", default-features = false, features = ["alloc"] }
 # "std" can't be here. We don't know about "half"
-minicbor = { version = "0.25.1", features = ["alloc", "derive"] }
+minicbor = { version = "0.20", features = ["alloc", "half", "derive"] }
 num-bigint = { version = "0.4.4", optional = true }
 # PARA METER EN TUXEDO-CORE:
 # serde = { version = "1.0.143", features = ["derive"] }
-serde = { version = "1.0.143", features = ["derive"], default-features = false }
+serde = { version = "1.0.143", default-features = false, features = [
+  "derive",
+  "alloc",
+] }
 # thiserror = "1.0.39"
 thiserror-no-std = "2.0.2"
 
