@@ -4,12 +4,7 @@
 
 // no std:
 use core::clone;
-use alloc::string::String;
-use alloc::vec::Vec;
-use alloc::boxed::Box;
-use core::ops::Deref;
-
-use pallas_codec::minicbor::decode::Error;
+use alloc::{string::String, vec::Vec, boxed::Box};
 use serde::{Deserialize, Serialize};
 
 use pallas_codec::minicbor::{self, Decode, Encode};

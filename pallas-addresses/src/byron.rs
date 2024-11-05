@@ -1,5 +1,4 @@
-use alloc::string::String;
-use alloc::vec::Vec;
+use alloc::{string::String, vec::Vec};
 
 use pallas_codec::{
     minicbor::{self, bytes::ByteVec, Decode, Encode},

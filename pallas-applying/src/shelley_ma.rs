@@ -30,8 +30,7 @@ use pallas_traverse::{
 };
 use core::{cmp::max, ops::Deref};
 use alloc::vec::Vec;
-
-use std::{cmp::max, collections::HashMap, ops::Deref};
+use hashbrown::HashMap;
 // TODO: remove when fixed missing args
 
 #[allow(clippy::too_many_arguments)]
@@ -552,7 +551,7 @@ fn check_stake_delegation(
 fn insert_or_err<K, V, E>(map: &mut HashMap<K, V>, key: &K, value: &V, error: E) -> Result<(), E>
 where
     K: Eq,
-    K: std::hash::Hash,
+    K: core::hash::Hash,
     K: Clone,
     V: Clone,
 {

@@ -27,9 +27,8 @@ use pallas_primitives::{
 };
 use pallas_traverse::{MultiEraInput, MultiEraOutput, OriginalHash};
 // use std::ops::Deref;
-use alloc::vec::Vec;
+use alloc::{vec::Vec, borrow::ToOwned};
 use core::ops::Deref;
-use alloc::borrow::ToOwned;
 
 pub fn validate_alonzo_tx(
     mtx: &MintedTx,

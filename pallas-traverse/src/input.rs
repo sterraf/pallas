@@ -1,10 +1,6 @@
 // use std::{borrow::Cow, fmt::Display, ops::Deref, str::FromStr};
-use alloc::string::String;
-use alloc::boxed::Box;
-use alloc::vec::Vec;
-use alloc::borrow::Cow;
-use core::{fmt, fmt::Display, str::FromStr};
-use core::ops::Deref;
+use alloc::{string::String, boxed::Box, vec::Vec, borrow::Cow};
+use core::{fmt, fmt::Display, str::FromStr, ops::Deref};
 
 use pallas_codec::utils::CborWrap;
 use pallas_crypto::hash::Hash;

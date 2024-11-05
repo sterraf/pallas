@@ -15,7 +15,6 @@ use cryptoxide::ed25519::{
 use rand_core::{CryptoRng, RngCore};
 use core::{any::type_name, convert::TryFrom, fmt, str::FromStr};
 use alloc::string::{String, ToString};
-
 use thiserror_no_std::Error;
 
 /// Ed25519 Secret Key

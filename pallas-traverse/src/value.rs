@@ -1,6 +1,7 @@
-use std::ops::Deref;
+use core::ops::Deref;
 
 use pallas_primitives::{alonzo, conway};
+use alloc::vec::Vec;
 
 use crate::{MultiEraPolicyAssets, MultiEraValue};
 

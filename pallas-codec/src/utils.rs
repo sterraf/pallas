@@ -8,6 +8,7 @@ use core::{fmt, hash::Hash as StdHash, ops::Deref};
 use alloc::{
     string::String, vec::Vec, str::FromStr,
 };
+use hashbrown::HashMap;
 
 static TAG_SET: u64 = 258;
 
@@ -102,7 +103,7 @@ where
 
 impl<K, V> From<KeyValuePairs<K, V>> for HashMap<K, V>
 where
-    K: Clone + Eq + std::hash::Hash,
+    K: Clone + Eq + core::hash::Hash,
     V: Clone,
 {
     fn from(other: KeyValuePairs<K, V>) -> Self {

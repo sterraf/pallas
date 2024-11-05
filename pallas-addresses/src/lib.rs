@@ -16,9 +16,7 @@ pub mod byron;
 pub mod varuint;
 
 // use std::{fmt::Display, io::Cursor, str::FromStr};
-use alloc::vec::Vec;
-use alloc::string::String;
-use alloc::borrow::ToOwned;
+use alloc::{vec::Vec, string::String, borrow::ToOwned};
 use core::{fmt, fmt::Display, str::FromStr};
 use core2::io::Cursor;
 

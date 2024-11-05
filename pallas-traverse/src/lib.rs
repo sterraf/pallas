@@ -9,10 +9,8 @@ use pallas_codec::utils::NonZeroInt;
 use pallas_codec::utils::PositiveCoin;
 // use std::{borrow::Cow, fmt::Display, hash::Hash as StdHash};
 use alloc::borrow::{Cow, ToOwned};
-use core::fmt::Display;
-use alloc::string::String;
-use alloc::boxed::Box;
-use core::hash::Hash as StdHash;
+use core::{fmt::Display, hash::Hash as StdHash};
+use alloc::{string::String, boxed::Box};
 
 use serde::{Deserialize, Serialize};
 use thiserror_no_std::Error;

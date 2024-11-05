@@ -9,7 +9,8 @@ use pallas_codec::{
     utils::MaybeIndefArray,
 };
 use serde::{Deserialize, Serialize};
-use std::{fmt, ops::Deref};
+use core::{fmt, ops::Deref};
+use alloc::{vec::Vec, string::String};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, PartialOrd, Ord, Clone)]
 pub enum PlutusData {

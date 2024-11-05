@@ -30,6 +30,7 @@ pub use pallas_crypto::hash::Hash;
 
 use pallas_codec::minicbor::{self, data::Tag, Decode, Encode};
 use serde::{Deserialize, Serialize};
+use alloc::{vec::Vec, string::String};
 
 // ----- Common type definitions
 
@@ -395,7 +396,7 @@ pub type TransactionIndex = u32;
     PartialOrd,
     Ord,
     Clone,
-    std::hash::Hash,
+    core::hash::Hash,
 )]
 pub struct TransactionInput {
     #[n(0)]

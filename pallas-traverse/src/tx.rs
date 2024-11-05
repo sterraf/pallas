@@ -1,9 +1,6 @@
 // use std::{borrow::Cow, collections::HashSet, ops::Deref};
-use alloc::vec::Vec;
-use alloc::boxed::Box;
-use alloc::borrow::Cow;
-use core::iter;
-use core::ops::Deref;
+use alloc::{vec::Vec, boxed::Box, borrow::Cow};
+use core::{iter, ops::Deref};
 use hashbrown::HashSet;
 
 use itertools::Itertools;

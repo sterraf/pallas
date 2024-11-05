@@ -21,7 +21,6 @@ pallas-traverse = { version = "=0.31.0", path = "../pallas-traverse" }
 # rand = "0.8"
 # hex = "0.4"
 hex = { version="0.4.3", default-features = false }
-# hashbrown = { version="0.14", default-features = false }
 hashbrown = "0.14"
 
 [dev-dependencies]
