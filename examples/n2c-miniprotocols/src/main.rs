@@ -7,12 +7,14 @@ use pallas::{
         facades::NodeClient,
         miniprotocols::{
             chainsync,
-            localstate::queries_v16::{self, Addr, Addrs},
+            localstate::queries_v16::{self, Addr, Addrs, PoolIds},
             Point, PRE_PRODUCTION_MAGIC,
         },
     },
 };
 use tracing::info;
+
+use hex::FromHex;
 
 async fn do_localstate_query(client: &mut NodeClient) {
     let client = client.statequery();
@@ -30,6 +32,18 @@ async fn do_localstate_query(client: &mut NodeClient) {
 
     let era = queries_v16::get_current_era(client).await.unwrap();
     info!("result: {:?}", era);
+
+    // Pool IDs must be in order.
+    let pool_id1 = "1e3105f23f2ac91b3fb4c35fa4fe301421028e356e114944e902005b";
+    let pool_id1: Bytes = Vec::<u8>::from_hex(pool_id1).unwrap().into();
+    let pool_id2 = "fdb5834ba06eb4baafd50550d2dc9b3742d2c52cc5ee65bf8673823b";
+    let pool_id2: Bytes = Vec::<u8>::from_hex(pool_id2).unwrap().into();
+    let pool_ids: PoolIds = vec![pool_id1, pool_id2].into();
+
+    let result = queries_v16::get_stake_pool_params(client, era, pool_ids.into())
+        .await
+        .unwrap();
+    info!("result: {:?}", result);
 
     let result = queries_v16::get_block_epoch_number(client, era)
         .await
