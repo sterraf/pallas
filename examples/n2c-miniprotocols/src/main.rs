@@ -15,6 +15,9 @@ use pallas::{
 };
 use tracing::info;
 
+mod localtxsubmission;
+use localtxsubmission::*;
+
 async fn do_localstate_query(client: &mut NodeClient) {
     let client = client.statequery();
 
@@ -177,11 +180,18 @@ async fn main() {
         .await
         .unwrap();
 
-    // execute an arbitrary "Local State" query against the node
-    do_localstate_query(&mut client).await;
 
-    // execute the chainsync flow from an arbitrary point in the chain
-    do_chainsync(&mut client).await;
+
+    // Test
+    do_local_tx_submission(&mut client).await;
+
+
+
+    // // execute an arbitrary "Local State" query against the node
+    // do_localstate_query(&mut client).await;
+    // 
+    // // execute the chainsync flow from an arbitrary point in the chain
+    // do_chainsync(&mut client).await;
 }
 
 // change the following to match the Cardano node named-pipe in your local
