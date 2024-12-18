@@ -127,6 +127,7 @@ impl Encode<()> for RejectReason {
 
 impl<'b> Decode<'b, ()> for TxError {
     fn decode(d: &mut Decoder<'b>, _ctx: &mut ()) -> Result<Self, decode::Error> {
+        let outer_pos = d.position();
         match d.datatype()? {
             CborType::U8 => return Ok(TxError::U8(d.u8()?)),
             CborType::Array => d.array()?,
@@ -138,21 +139,13 @@ impl<'b> Decode<'b, ()> for TxError {
         };
         // This seems to be always 1 for Conway errors.
         let fst_num = d.u8()?;
-        let data = d.input();
-        let size = d.array()?.ok_or(decode::Error::message(
+        let inner_pos = d.position();
+        let _ = d.array()?.ok_or(decode::Error::message(
             "Errors are supposed to be definite-length arrays",
         ))?;
-        let mut raw_elements = Vec::new();
-        let start_pos = d.position();
 
         if fst_num != 1 {
-            for _ in 0..size {
-                d.skip()?
-            } // Skip decoding the elements of the array
-              // Store the slice of raw CBOR
-            raw_elements.append(&mut data[start_pos..d.position()].to_vec());
-
-            return Ok(TxError::Raw(raw_elements));
+            return Ok(TxError::Raw(cbor_last(d, outer_pos)?));
         };
 
         match d.u8()? {
@@ -164,13 +157,7 @@ impl<'b> Decode<'b, ()> for TxError {
                 Ok(TxError::ExtraneousScriptWitnessesUTXOW(vec_bytes))
             }
             _ => {
-                for _ in 1..size {
-                    d.skip()?
-                } // Skip decoding the elements of the array
-                  // Store the slice of raw CBOR
-                raw_elements.append(&mut data[start_pos..d.position()].to_vec());
-
-                Ok(TxError::Raw(raw_elements))
+                return Ok(TxError::Raw(cbor_last(d, inner_pos)?));
             }
         }
     }
@@ -179,7 +166,6 @@ impl<'b> Decode<'b, ()> for TxError {
 impl<'b> Decode<'b, ()> for UtxoFailure {
     fn decode(d: &mut Decoder<'b>, _ctx: &mut ()) -> Result<Self, decode::Error> {
         let start_pos = d.position();
-        let data = d.input();
         d.array()?;
 
         match d.u8()? {
@@ -188,14 +174,19 @@ impl<'b> Decode<'b, ()> for UtxoFailure {
                 return Ok(UtxoFailure::BadInputsUTxO(d.decode()?));
             }
             _ => {
-                // Return decoder index to origin of array and return it as bytes.
-                d.set_position(start_pos);
-                d.skip()?;
-
-                return Ok(UtxoFailure::Raw(data[start_pos..d.position()].to_vec()));
+                return Ok(UtxoFailure::Raw(cbor_last(d, start_pos)?));
             }
         };
     }
+}
+
+/// Returns the CBOR data of the item at the provided position.
+pub fn cbor_last(d: &mut Decoder, start_pos: usize) -> Result<Vec<u8>, decode::Error> {
+    let data = d.input();
+    d.set_position(start_pos);
+    d.skip()?;
+
+    Ok(data[start_pos..d.position()].to_vec())
 }
 
 #[cfg(test)]
