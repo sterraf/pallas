@@ -162,6 +162,7 @@ impl<'b> Decode<'b, ()> for TxError {
 
         match d.u8()? {
             0 => Ok(TxError::UtxoFailure(d.decode()?)),
+            5 => Ok(TxError::MissingTxBodyMetadataHash(d.decode()?)),
             9 => {
                 d.tag()?;
                 let vec_bytes: Vec<Bytes> = d.decode()?;
@@ -189,6 +190,11 @@ impl Encode<()> for TxError {
                 e.u8(9)?;
                 e.tag(Tag::new(258))?;
                 e.encode(addrs)?;
+            }
+            TxError::MissingTxBodyMetadataHash(addr) => {
+                e.array(2)?;
+                e.u8(5)?;
+                e.encode(addr)?;
             }
             TxError::UtxoFailure(failure) => {
                 e.array(2)?;
@@ -405,6 +411,7 @@ mod tests {
     fn round_trip_codec() {
         decode_reject_reason(RAW_REJECT_RESPONSE_CONWAY);
         decode_reject_reason(ISVALID_REJECT_PREVIEW);
+        decode_reject_reason(MISSING_METADATA_HASH);
     }
 
     const RAW_REJECT_RESPONSE: &str =
@@ -504,4 +511,7 @@ mod tests {
          00830282811a044f777c811a044f858c1a04ace388";
 
     const ISVALID_REJECT_PREVIEW: &str = "8202818206818201820082008300f48100";
+
+    const MISSING_METADATA_HASH: &str =
+        "82028182068182018205582059182929bdbb6e212a80e65564a1c21a3ffae38dc99b9dc2b6f4184b12dd2b8c";
 }
