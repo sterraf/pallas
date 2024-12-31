@@ -224,6 +224,9 @@ impl<'b> Decode<'b, ()> for UtxoFailure {
                 d.tag()?;
                 return Ok(UtxoFailure::BadInputsUTxO(d.decode()?));
             }
+            15 => {
+                return Ok(UtxoFailure::CollateralContainsNonADA(d.decode()?));
+            }
             12 => {
                 return Ok(UtxoFailure::InsufficientCollateral(d.i64()?, d.u64()?));
             }
@@ -269,6 +272,11 @@ impl Encode<()> for UtxoFailure {
                 e.u8(12)?;
                 e.i64(*deltacoin)?;
                 e.u64(*coin)?;
+            }
+            UtxoFailure::CollateralContainsNonADA(value) => {
+                e.array(2)?;
+                e.u8(15)?;
+                e.encode(value)?;
             }
             UtxoFailure::TooManyCollateralInputs(allowed, num) => {
                 e.array(3)?;
