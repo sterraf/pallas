@@ -225,10 +225,10 @@ impl<'b> Decode<'b, ()> for UtxoFailure {
                 return Ok(UtxoFailure::BadInputsUTxO(d.decode()?));
             }
             12 => {
-                return Ok(UtxoFailure::InsufficientCollateral(
-                    d.decode()?,
-                    d.decode()?,
-                ));
+                return Ok(UtxoFailure::InsufficientCollateral(d.i64()?, d.u64()?));
+            }
+            18 => {
+                return Ok(UtxoFailure::TooManyCollateralInputs(d.u16()?, d.u16()?));
             }
             19 => {
                 return Ok(UtxoFailure::NoCollateralInputs);
@@ -264,7 +264,13 @@ impl Encode<()> for UtxoFailure {
                 e.i64(*deltacoin)?;
                 e.u64(*coin)?;
             }
-            UtxoFailure::NoCollateralInputs => {
+            UtxoFailure::TooManyCollateralInputs(allowed, num) => {
+                e.array(3)?;
+                e.u8(18)?;
+                e.u16(*allowed)?;
+                e.u16(*num)?;
+            }
+                UtxoFailure::NoCollateralInputs => {
                 e.array(1)?;
                 e.u8(19)?;
             }
