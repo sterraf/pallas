@@ -224,6 +224,12 @@ impl<'b> Decode<'b, ()> for UtxoFailure {
                 d.tag()?;
                 return Ok(UtxoFailure::BadInputsUTxO(d.decode()?));
             }
+            12 => {
+                return Ok(UtxoFailure::InsufficientCollateral(
+                    d.decode()?,
+                    d.decode()?,
+                ));
+            }
             19 => {
                 return Ok(UtxoFailure::NoCollateralInputs);
             }
@@ -251,6 +257,12 @@ impl Encode<()> for UtxoFailure {
                 e.u8(1)?;
                 e.tag(Tag::new(258))?;
                 e.encode(inputs)?;
+            }
+            UtxoFailure::InsufficientCollateral(deltacoin, coin) => {
+                e.array(3)?;
+                e.u8(12)?;
+                e.i64(*deltacoin)?;
+                e.u64(*coin)?;
             }
             UtxoFailure::NoCollateralInputs => {
                 e.array(1)?;
