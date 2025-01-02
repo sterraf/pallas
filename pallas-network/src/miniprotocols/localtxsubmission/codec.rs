@@ -7,6 +7,45 @@ use crate::miniprotocols::localtxsubmission::{
 };
 use std::str::from_utf8;
 
+// FIXME: Unify with above after merge
+use crate::miniprotocols::localtxsubmission::SMaybe;
+
+impl<'b, T: Decode<'b, ()>> Decode<'b, ()> for SMaybe<T> {
+    fn decode(d: &mut Decoder<'b>, _ctx: &mut ()) -> Result<Self, decode::Error> {
+        let len = d.array()?;
+        match len {
+            Some(0) => Ok(SMaybe::None),
+            Some(1) => Ok(SMaybe::Some(d.decode()?)),
+            Some(_) => Err(decode::Error::message("Expected array of length <=1")),
+            None => Err(decode::Error::message(
+                "Expected array of length <=1, obtained `None`"
+            )),
+        }
+    }
+}
+
+impl<T> Encode<()> for SMaybe<T>
+where
+    T: Encode<()>,
+{
+    fn encode<W: encode::Write>(
+        &self,
+        e: &mut Encoder<W>,
+        _ctx: &mut (),
+    ) -> Result<(), encode::Error<W::Error>> {
+        match self {
+            SMaybe::None => {
+                e.array(0)?;
+            }
+            SMaybe::Some(t) => {
+                e.array(1)?;
+                e.encode(t)?;
+            }
+        }
+        Ok(())
+    }
+}
+
 impl<Tx, Reject> Encode<()> for Message<Tx, Reject>
 where
     Tx: Encode<()>,
@@ -177,6 +216,7 @@ impl<'b> Decode<'b, ()> for TxError {
 
                 Ok(TxError::NotAllowedSupplementalDatums(unallowed, acceptable))
             }
+            13 => Ok(TxError::PPViewHashesDontMatch(d.decode()?, d.decode()?)),
             15 => Ok(TxError::ExtraRedeemers(d.decode()?)),
             _ => {
                 return Ok(TxError::Raw(cbor_last(d, inner_pos)?));
@@ -212,6 +252,12 @@ impl Encode<()> for TxError {
                 e.encode(unall)?;
                 e.tag(Tag::new(258))?;
                 e.encode(accpt)?;
+            }
+            TxError::PPViewHashesDontMatch(body_hash, pp_hash) => {
+                e.array(3)?;
+                e.u8(13)?;
+                e.encode(body_hash)?;
+                e.encode(pp_hash)?;
             }
             TxError::ExtraRedeemers(purp) => {
                 e.array(2)?;
