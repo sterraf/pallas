@@ -169,6 +169,14 @@ impl<'b> Decode<'b, ()> for TxError {
 
                 Ok(TxError::ExtraneousScriptWitnessesUTXOW(vec_bytes))
             }
+            12 => {
+                d.tag()?;
+                let unallowed = d.decode()?;
+                d.tag()?;
+                let acceptable = d.decode()?;
+
+                Ok(TxError::NotAllowedSupplementalDatums(unallowed, acceptable))
+            }
             _ => {
                 return Ok(TxError::Raw(cbor_last(d, inner_pos)?));
             }
@@ -195,6 +203,14 @@ impl Encode<()> for TxError {
                 e.array(2)?;
                 e.u8(5)?;
                 e.encode(addr)?;
+            }
+            TxError::NotAllowedSupplementalDatums(unall, accpt) => {
+                e.array(3)?;
+                e.u8(12)?;
+                e.tag(Tag::new(258))?;
+                e.encode(unall)?;
+                e.tag(Tag::new(258))?;
+                e.encode(accpt)?;
             }
             TxError::UtxoFailure(failure) => {
                 e.array(2)?;

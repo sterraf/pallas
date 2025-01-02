@@ -95,6 +95,7 @@ pub enum TxError {
     ExtraneousScriptWitnessesUTXOW(Vec<Bytes>),
     UtxoFailure(UtxoFailure),
     MissingTxBodyMetadataHash(Bytes),
+    NotAllowedSupplementalDatums(BTreeSet<Bytes>, BTreeSet<Bytes>),
     U8(u8),
     Raw(Vec<u8>),
 }
