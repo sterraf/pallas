@@ -177,6 +177,7 @@ impl<'b> Decode<'b, ()> for TxError {
 
                 Ok(TxError::NotAllowedSupplementalDatums(unallowed, acceptable))
             }
+            15 => Ok(TxError::ExtraRedeemers(d.decode()?)),
             _ => {
                 return Ok(TxError::Raw(cbor_last(d, inner_pos)?));
             }
@@ -211,6 +212,11 @@ impl Encode<()> for TxError {
                 e.encode(unall)?;
                 e.tag(Tag::new(258))?;
                 e.encode(accpt)?;
+            }
+            TxError::ExtraRedeemers(purp) => {
+                e.array(2)?;
+                e.u8(15)?;
+                e.encode(purp)?;
             }
             TxError::UtxoFailure(failure) => {
                 e.array(2)?;
