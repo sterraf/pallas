@@ -18,7 +18,7 @@ impl<'b, T: Decode<'b, ()>> Decode<'b, ()> for SMaybe<T> {
             Some(1) => Ok(SMaybe::Some(d.decode()?)),
             Some(_) => Err(decode::Error::message("Expected array of length <=1")),
             None => Err(decode::Error::message(
-                "Expected array of length <=1, obtained `None`"
+                "Expected array of length <=1, obtained `None`",
             )),
         }
     }
