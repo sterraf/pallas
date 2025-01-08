@@ -1,24 +1,24 @@
 # ConwayLedgerPredFailure
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Ledger.hsL138)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Ledger.hsL138)
 
 ## 1 ConwayUtxowFailure
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxow.hsL94)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxow.hsL94)
 
 ### 0 UtxoFailure
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxo.hsL78C6-L78C28)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxo.hsL78C6-L78C28)
 
 #### 0	UtxosFailure
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxos.hsL74C6-L74C28)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxos.hsL74C6-L74C28)
 
 ##### 0 ValidationTagMismatch
 
 ##### 1 CollectErrors
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/alonzo/impl/src/Cardano/Ledger/Alonzo/Plutus/Evaluate.hsL79)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/alonzo/impl/src/Cardano/Ledger/Alonzo/Plutus/Evaluate.hsL79)
 
 ###### 0	NoRedeemer
 
@@ -28,14 +28,14 @@
 
 ###### 3	BadTranslation
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/TxInfo.hsL139)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/TxInfo.hsL139)
 
 - 0 BabbageContextError
 
-  [At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/babbage/impl/src/Cardano/Ledger/Babbage/TxInfo.hsL230)
+  [At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/babbage/impl/src/Cardano/Ledger/Babbage/TxInfo.hsL230)
   - 0 AlonzoContextError
 
-	  [At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/alonzo/impl/src/Cardano/Ledger/Alonzo/Plutus/TxInfo.hsL169)
+	  [At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/alonzo/impl/src/Cardano/Ledger/Alonzo/Plutus/TxInfo.hsL169)
 
       - 0 TranslationLogicMissingInput
 
@@ -143,17 +143,17 @@
 
 ## 2 ConwayCertsFailure
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Certs.hsL115)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Certs.hsL115)
 
 ### 0	WithdrawalsNotInRewardsCERTS
 
 ### 1	CertFailure
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Cert.hsL103)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Cert.hsL103)
 
 #### 1	DelegFailure
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Deleg.hsL104)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Deleg.hsL104)
 
 ##### 1	IncorrectDepositDELEG
 
@@ -169,7 +169,7 @@
 
 #### 2	PoolFailure
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/shelley/impl/src/Cardano/Ledger/Shelley/Rules/Pool.hsL94)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/shelley/impl/src/Cardano/Ledger/Shelley/Rules/Pool.hsL94)
 
 ##### 0	StakePoolNotRegisteredOnKeyPOOL
 
@@ -183,7 +183,7 @@
 
 #### 3	GovCertFailure
 
-[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/GovCert.hsL113C6-L113C30)
+[At ledger repo](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/GovCert.hsL113C6-L113C30)
 
 ##### 0	ConwayDRepAlreadyRegistered
 
