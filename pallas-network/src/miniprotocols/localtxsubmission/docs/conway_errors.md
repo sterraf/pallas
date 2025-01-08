@@ -1,221 +1,244 @@
-# Conway Tx submission errors
+# ConwayLedgerPredFailure
 
-## [ConwayLedgerPredFailure](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Ledger.hs#L138)
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Ledger.hsL138)
 
-### 1 [ConwayUtxowFailure](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxow.hs#L94)
+## 1 ConwayUtxowFailure
 
-- #### 0 [UtxoFailure](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxo.hs#L78C6-L78C28)
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxow.hsL94)
 
-  - ##### 0	[UtxosFailure](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxos.hs#L74C6-L74C28)
+### 0 UtxoFailure
 
-    - ###### 0 ValidationTagMismatch
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxo.hsL78C6-L78C28)
 
-    - ###### 1 [CollectErrors](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/alonzo/impl/src/Cardano/Ledger/Alonzo/Plutus/Evaluate.hs#L79)
+#### 0	UtxosFailure
 
-      - ####### 0	NoRedeemer
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxos.hsL74C6-L74C28)
 
-      - ####### 1	NoWitness
+##### 0 ValidationTagMismatch
 
-      - ####### 2	NoCostModel
+##### 1 CollectErrors
 
-      - ####### 3	[BadTranslation](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/TxInfo.hs#L139)
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/alonzo/impl/src/Cardano/Ledger/Alonzo/Plutus/Evaluate.hsL79)
 
-        - ######## 0	[BabbageContextError](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/babbage/impl/src/Cardano/Ledger/Babbage/TxInfo.hs#L230)
+###### 0	NoRedeemer
 
-            - ######## 0	[AlonzoContextError](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/alonzo/impl/src/Cardano/Ledger/Alonzo/Plutus/TxInfo.hs#L169)
+###### 1	NoWitness
 
-              - ######### 0	TranslationLogicMissingInput
+###### 2	NoCostModel
 
-              - ######### 1	TimeTranslationPastHorizon
+###### 3	BadTranslation
 
-            - ######## 1	ByronTxOutInContext
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/TxInfo.hsL139)
 
-            - ######## 2	RedeemerPointerPointsToNothing
+- 0 BabbageContextError
 
-            - ######## 3	InlineDatumsNotSupported
+  [At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/babbage/impl/src/Cardano/Ledger/Babbage/TxInfo.hsL230)
+  - 0 AlonzoContextError
 
-            - ######## 4	ReferenceScriptsNotSupported
+	  [At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/alonzo/impl/src/Cardano/Ledger/Alonzo/Plutus/TxInfo.hsL169)
 
-            - ######## 5	ReferenceInputsNotSupported
+      - 0 TranslationLogicMissingInput
 
-        - ######## 1	CertificateNotSupported
+      - 1 TimeTranslationPastHorizon
 
-        - ######## 2	PlutusPurposeNotSupported
+  - 1	ByronTxOutInContext
 
-        - ######## 3	CurrentTreasuryFieldNotSupported
+  - 2	RedeemerPointerPointsToNothing
 
-        - ######## 4	VotingProceduresFieldNotSupported
+  - 3	InlineDatumsNotSupported
 
-        - ######## 5	ProposalProceduresFieldNotSupported
+  - 4	ReferenceScriptsNotSupported
 
-        - ######## 6	TreasuryDonationFieldNotSupported
+  - 5	ReferenceInputsNotSupported
 
-  - ##### 1	BadInputsUTxO
+- 1	CertificateNotSupported
 
-  - ##### 2	OutsideValidityIntervalUTxO
+- 2	PlutusPurposeNotSupported
 
-  - ##### 3	MaxTxSizeUTxO
+- 3	CurrentTreasuryFieldNotSupported
 
-  - ##### 4	InputSetEmptyUTxO
+- 4	VotingProceduresFieldNotSupported
 
-  - ##### 5	FeeTooSmallUTxO
+- 5	ProposalProceduresFieldNotSupported
 
-  - ##### 6	ValueNotConservedUTxO
+- 6	TreasuryDonationFieldNotSupported
 
-  - ##### 7	WrongNetwork
+#### 1	BadInputsUTxO
 
-  - ##### 8	WrongNetworkWithdrawal
+#### 2	OutsideValidityIntervalUTxO
 
-  - ##### 9	OutputTooSmallUTxO
+#### 3	MaxTxSizeUTxO
 
-  - ##### 10	OutputBootAddrAttrsTooBig
+#### 4	InputSetEmptyUTxO
 
-  - ##### 11	OutputTooBigUTxO
+#### 5	FeeTooSmallUTxO
 
-  - ##### 12	InsufficientCollateral
+#### 6	ValueNotConservedUTxO
 
-  - ##### 13	ScriptsNotPaidUTxO
+#### 7	WrongNetwork
 
-  - ##### 14	ExUnitsTooBigUTxO
+#### 8	WrongNetworkWithdrawal
 
-  - ##### 15	CollateralContainsNonADA
+#### 9	OutputTooSmallUTxO
 
-  - ##### 16	WrongNetworkInTxBody
+#### 10	OutputBootAddrAttrsTooBig
 
-  - ##### 17	OutsideForecast
+#### 11	OutputTooBigUTxO
 
-  - ##### 18	TooManyCollateralInputs
+#### 12	InsufficientCollateral
 
-  - ##### 19	NoCollateralInputs
+#### 13	ScriptsNotPaidUTxO
 
-  - ##### 20	IncorrectTotalCollateralField
+#### 14	ExUnitsTooBigUTxO
 
-  - ##### 21	BabbageOutputTooSmallUTxO
+#### 15	CollateralContainsNonADA
 
-  - ##### 22	BabbageNonDisjointRefInputs
+#### 16	WrongNetworkInTxBody
 
-- #### 1 InvalidWitnessesUTXOW
+#### 17	OutsideForecast
 
-- #### 2 MissingVKeyWitnessesUTXOW
+#### 18	TooManyCollateralInputs
 
-- #### 3 MissingScriptWitnessesUTXOW
+#### 19	NoCollateralInputs
 
-- #### 4 ScriptWitnessNotValidatingUTXOW
+#### 20	IncorrectTotalCollateralField
 
-- #### 5 MissingTxBodyMetadataHash
+#### 21	BabbageOutputTooSmallUTxO
 
-- #### 6 MissingTxMetadata
+#### 22	BabbageNonDisjointRefInputs
 
-- #### 7 ConflictingMetadataHash
+### 1 InvalidWitnessesUTXOW
 
-- #### 8 InvalidMetadata
+### 2 MissingVKeyWitnessesUTXOW
 
-- #### 8 ExtraneousScriptWitnessesUTXOW
+### 3 MissingScriptWitnessesUTXOW
 
-- #### 10 MissingRedeemers
+### 4 ScriptWitnessNotValidatingUTXOW
 
-- #### 11 MissingRequiredDatums
+### 5 MissingTxBodyMetadataHash
 
-- #### 12 NotAllowedSupplementalDatums
+### 6 MissingTxMetadata
 
-- #### 13 PPViewHashesDontMatch
+### 7 ConflictingMetadataHash
 
-- #### 14 UnspendableUTxONoDatumHash
+### 8 InvalidMetadata
 
-- #### 15 ExtraRedeemers
+### 8 ExtraneousScriptWitnessesUTXOW
 
-- #### 16 MalformedScriptWitnesses
+### 10 MissingRedeemers
 
-- #### 17 MalformedReferenceScripts
+### 11 MissingRequiredDatums
 
-### 2 [ConwayCertsFailure](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Certs.hs#L115)
+### 12 NotAllowedSupplementalDatums
 
-- #### 0	WithdrawalsNotInRewardsCERTS
+### 13 PPViewHashesDontMatch
 
-- #### 1	[CertFailure](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Cert.hs#L103)
+### 14 UnspendableUTxONoDatumHash
 
-  - ##### 1	[DelegFailure](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Deleg.hs#L104)
+### 15 ExtraRedeemers
 
-    - ###### 1	IncorrectDepositDELEG
+### 16 MalformedScriptWitnesses
 
-    - ###### 2	StakeKeyRegisteredDELEG
+### 17 MalformedReferenceScripts
 
-    - ###### 3	StakeKeyNotRegisteredDELEG
+## 2 ConwayCertsFailure
 
-    - ###### 4	StakeKeyHasNonZeroRewardAccountBalanceDELEG
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Certs.hsL115)
 
-    - ###### 5	DelegateeDRepNotRegisteredDELEG
+### 0	WithdrawalsNotInRewardsCERTS
 
-    - ###### 6	DelegateeStakePoolNotRegisteredDELEG
+### 1	CertFailure
 
-  - ##### 2	[PoolFailure](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/shelley/impl/src/Cardano/Ledger/Shelley/Rules/Pool.hs#L94)
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Cert.hsL103)
 
-    - ###### 0	StakePoolNotRegisteredOnKeyPOOL
+#### 1	DelegFailure
 
-    - ###### 1	StakePoolRetirementWrongEpochPOOL
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Deleg.hsL104)
 
-    - ###### 3	StakePoolCostTooLowPOOL
+##### 1	IncorrectDepositDELEG
 
-    - ###### 4	WrongNetworkPOOL
+##### 2	StakeKeyRegisteredDELEG
 
-    - ###### 5	PoolMedataHashTooBig
+##### 3	StakeKeyNotRegisteredDELEG
 
-  - ##### 3	[GovCertFailure](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/GovCert.hs#L113C6-L113C30)
+##### 4	StakeKeyHasNonZeroRewardAccountBalanceDELEG
 
-    - ###### 0	ConwayDRepAlreadyRegistered
+##### 5	DelegateeDRepNotRegisteredDELEG
 
-    - ###### 1	ConwayDRepNotRegistered
+##### 6	DelegateeStakePoolNotRegisteredDELEG
 
-    - ###### 2	ConwayDRepIncorrectDeposit
+#### 2	PoolFailure
 
-    - ###### 3	ConwayCommitteeHasPreviouslyResigned
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/shelley/impl/src/Cardano/Ledger/Shelley/Rules/Pool.hsL94)
 
-    - ###### 4	ConwayDRepIncorrectRefund 
+##### 0	StakePoolNotRegisteredOnKeyPOOL
 
-    - ###### 5	ConwayCommitteeIsUnknown
+##### 1	StakePoolRetirementWrongEpochPOOL
 
-### 3 ConwayGovFailure
+##### 3	StakePoolCostTooLowPOOL
 
-- #### 0	GovActionsDoNotExist
+##### 4	WrongNetworkPOOL
 
-- #### 1	MalformedProposal
+##### 5	PoolMedataHashTooBig
 
-- #### 2	ProposalProcedureNetworkIdMismatch
+#### 3	GovCertFailure
 
-- #### 3	TreasuryWithdrawalsNetworkIdMismatch
+[At ledger repo]((https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/GovCert.hsL113C6-L113C30)
 
-- #### 4	ProposalDepositIncorrect
+##### 0	ConwayDRepAlreadyRegistered
 
-- #### 5	DisallowedVoters
+##### 1	ConwayDRepNotRegistered
 
-- #### 6	ConflictingCommitteeUpdate
+##### 2	ConwayDRepIncorrectDeposit
 
-- #### 7	ExpirationEpochTooSmall
+##### 3	ConwayCommitteeHasPreviouslyResigned
 
-- #### 8	InvalidPrevGovActionId
+##### 4	ConwayDRepIncorrectRefund 
 
-- #### 9	VotingOnExpiredGovAction
+##### 5	ConwayCommitteeIsUnknown
 
-- #### 10	ProposalCantFollow
+## 3 ConwayGovFailure
 
-- #### 11	InvalidPolicyHash
+### 0	GovActionsDoNotExist
 
-- #### 12	DisallowedProposalDuringBootstrap
+### 1	MalformedProposal
 
-- #### 13	DisallowedVotesDuringBootstrap
+### 2	ProposalProcedureNetworkIdMismatch
 
-- #### 14	VotersDoNotExist
+### 3	TreasuryWithdrawalsNetworkIdMismatch
 
-- #### 15	ZeroTreasuryWithdrawals
+### 4	ProposalDepositIncorrect
 
-- #### 16	ProposalReturnAccountDoesNotExist
+### 5	DisallowedVoters
 
-- #### 17	TreasuryWithdrawalReturnAccountsDoNotExist
+### 6	ConflictingCommitteeUpdate
 
-### 4 ConwayWdrlNotDelegatedToDRep
+### 7	ExpirationEpochTooSmall
 
-### 5 ConwayTreasuryValueMismatch
+### 8	InvalidPrevGovActionId
 
-### 6 ConwayTxRefScriptsSizeTooBig
+### 9	VotingOnExpiredGovAction
 
-### 7 ConwayMempoolFailure
+### 10	ProposalCantFollow
+
+### 11	InvalidPolicyHash
+
+### 12	DisallowedProposalDuringBootstrap
+
+### 13	DisallowedVotesDuringBootstrap
+
+### 14	VotersDoNotExist
+
+### 15	ZeroTreasuryWithdrawals
+
+### 16	ProposalReturnAccountDoesNotExist
+
+### 17	TreasuryWithdrawalReturnAccountsDoNotExist
+
+## 4 ConwayWdrlNotDelegatedToDRep
+
+## 5 ConwayTreasuryValueMismatch
+
+## 6 ConwayTxRefScriptsSizeTooBig
+
+## 7 ConwayMempoolFailure
