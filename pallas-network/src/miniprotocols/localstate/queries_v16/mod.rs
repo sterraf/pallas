@@ -25,41 +25,71 @@ use super::{Client, ClientError};
 mod codec;
 
 // https://github.com/input-output-hk/ouroboros-consensus/blob/main/ouroboros-consensus-cardano/src/shelley/Ouroboros/Consensus/Shelley/Ledger/Query.hs
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Encode, Decode, Debug, Clone, PartialEq)]
+#[cbor(flat)]
 #[repr(u16)]
 pub enum BlockQuery {
+    #[n(0)]
     GetLedgerTip,
+    #[n(1)]
     GetEpochNo,
-    GetNonMyopicMemberRewards(AnyCbor),
+    #[n(2)]
+    GetNonMyopicMemberRewards(#[n(0)] AnyCbor),
+    #[n(3)]
     GetCurrentPParams,
+    #[n(4)]
     GetProposedPParamsUpdates,
+    #[n(5)]
     GetStakeDistribution,
-    GetUTxOByAddress(Addrs),
+    #[n(6)]
+    GetUTxOByAddress(#[n(0)] Addrs),
+    #[n(7)]
     GetUTxOWhole,
+    #[n(8)]
     DebugEpochState,
-    GetCBOR(Box<BlockQuery>),
-    GetFilteredDelegationsAndRewardAccounts(StakeAddrs),
+    #[n(9)]
+    GetCBOR(#[n(0)] Box<BlockQuery>),
+    #[n(10)]
+    GetFilteredDelegationsAndRewardAccounts(#[n(0)] StakeAddrs),
+    #[n(11)]
     GetGenesisConfig,
+    #[n(12)]
     DebugNewEpochState,
+    #[n(13)]
     DebugChainDepState,
+    #[n(14)]
     GetRewardProvenance,
-    GetUTxOByTxIn(TxIns),
+    #[n(15)]
+    GetUTxOByTxIn(#[n(0)] TxIns),
+    #[n(16)]
     GetStakePools,
-    GetStakePoolParams(Pools),
+    #[n(17)]
+    GetStakePoolParams(#[n(0)] Pools),
+    #[n(18)]
     GetRewardInfoPools,
-    GetPoolState(SMaybe<Pools>),
-    GetStakeSnapshots(SMaybe<Pools>),
-    GetPoolDistr(SMaybe<Pools>),
-    GetStakeDelegDeposits(AnyCbor),
+    #[n(19)]
+    GetPoolState(#[n(0)] SMaybe<Pools>),
+    #[n(20)]
+    GetStakeSnapshots(#[n(0)] SMaybe<Pools>),
+    #[n(21)]
+    GetPoolDistr(#[n(0)] SMaybe<Pools>),
+    #[n(22)]
+    GetStakeDelegDeposits(#[n(0)] AnyCbor),
+    #[n(23)]
     GetConstitution,
+    #[n(24)]
     GetGovState,
-    GetDRepState(TaggedSet<StakeAddr>),
+    #[n(25)]
+    GetDRepState(#[n(0)] TaggedSet<StakeAddr>),
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Encode, Decode, Debug, Clone, PartialEq)]
+#[cbor(flat)]
 #[repr(u16)]
 pub enum HardForkQuery {
+    #[n(0)]
     GetInterpreter,
+    #[n(1)]
     GetCurrentEra,
 }
 
@@ -73,11 +103,16 @@ pub enum LedgerQuery {
     HardForkQuery(HardForkQuery),
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Encode, Decode, Debug, Clone, PartialEq)]
+#[cbor(flat)]
 pub enum Request {
-    LedgerQuery(LedgerQuery),
+    #[n(0)]
+    LedgerQuery(#[n(0)] LedgerQuery),
+    #[n(1)]
     GetSystemStart,
+    #[n(2)]
     GetChainBlockNo,
+    #[n(3)]
     GetChainPoint,
 }
 
