@@ -3,8 +3,7 @@ use pallas_codec::minicbor::{decode, encode, Decode, Decoder, Encode, Encoder};
 use pallas_codec::utils::Bytes;
 
 use crate::miniprotocols::localtxsubmission::{
-    EraTx, Message, RejectReason, SMaybe, TagMismatchDescription, TxError, UtxoFailure,
-    UtxosFailure, UtxowFailure,
+    EraTx, Message, RejectReason, SMaybe, TxError, UtxoFailure, UtxowFailure,
 };
 use std::str::from_utf8;
 
@@ -420,81 +419,6 @@ impl Encode<()> for UtxoFailure {
                 e.encode(out_mins)?;
             }
             UtxoFailure::Raw(s) => e.writer_mut().write_all(s).map_err(encode::Error::write)?,
-        }
-
-        Ok(())
-    }
-}
-
-impl<'b> Decode<'b, ()> for UtxosFailure {
-    fn decode(d: &mut Decoder<'b>, _ctx: &mut ()) -> Result<Self, decode::Error> {
-        d.array()?;
-
-        match d.u8()? {
-            0 => Ok(UtxosFailure::ValidationTagMismatch(
-                d.decode()?,
-                d.decode()?,
-            )),
-            1 => Ok(UtxosFailure::CollectErrors(d.decode()?)),
-            _ => Err(decode::Error::message("Unknown `UtxosFailure` variant")),
-        }
-    }
-}
-
-impl Encode<()> for UtxosFailure {
-    fn encode<W: encode::Write>(
-        &self,
-        e: &mut Encoder<W>,
-        _ctx: &mut (),
-    ) -> Result<(), encode::Error<W::Error>> {
-        match self {
-            UtxosFailure::ValidationTagMismatch(isv, tmd) => {
-                e.array(3)?;
-                e.u8(0)?;
-                e.encode(isv)?;
-                e.encode(tmd)?;
-            }
-            UtxosFailure::CollectErrors(c) => {
-                e.array(2)?;
-                e.u8(1)?;
-                e.encode(c)?;
-            }
-        }
-
-        Ok(())
-    }
-}
-
-impl<'b> Decode<'b, ()> for TagMismatchDescription {
-    fn decode(d: &mut Decoder<'b>, _ctx: &mut ()) -> Result<Self, decode::Error> {
-        d.array()?;
-
-        match d.u8()? {
-            0 => Ok(TagMismatchDescription::PassedUnexpectedly),
-            1 => Ok(TagMismatchDescription::FailedUnexpectedly(d.decode()?)),
-            _ => Err(decode::Error::message(
-                "Unknown `TagMismatchDescription` variant",
-            )),
-        }
-    }
-}
-
-impl Encode<()> for TagMismatchDescription {
-    fn encode<W: encode::Write>(
-        &self,
-        e: &mut Encoder<W>,
-        _ctx: &mut (),
-    ) -> Result<(), encode::Error<W::Error>> {
-        match self {
-            TagMismatchDescription::PassedUnexpectedly => {
-                e.array(1)?;
-                e.u8(0)?;
-            }
-            TagMismatchDescription::FailedUnexpectedly(c) => {
-                e.array(2)?;
-                e.u8(1)?;
-                e.encode(c)?;
-            }
         }
 
         Ok(())

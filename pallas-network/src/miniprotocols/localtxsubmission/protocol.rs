@@ -35,11 +35,14 @@ pub type FailureDescription = AnyCbor;
 /// in the Haskell sources.
 ///
 /// Represents the reasons why a tag mismatch occurred during validation.
-#[derive(Debug, Clone, Eq, PartialEq)]
+#[derive(Encode, Decode, Debug, Clone, PartialEq, Eq)]
+#[cbor(flat)]
 pub enum TagMismatchDescription {
+    #[n(0)]
     PassedUnexpectedly,
+    #[n(1)]
     // FIXME: Do we want to use `NonEmptySet`? Check other occurrences of `BTreeSet`.
-    FailedUnexpectedly(BTreeSet<FailureDescription>),
+    FailedUnexpectedly(#[n(0)] BTreeSet<FailureDescription>),
 }
 
 /// Errors that can occur when collecting inputs for phase-2 scripts.
@@ -62,10 +65,13 @@ pub struct IsValid(#[n(0)] pub bool);
 
 /// Conway Utxo subtransition errors. It corresponds to [ConwayUtxosPredFailure](https://github.com/IntersectMBO/cardano-ledger/blob/d30a7ae828e802e98277c82e278e570955afc273/eras/conway/impl/src/Cardano/Ledger/Conway/Rules/Utxos.hs#L74C6-L74C28)
 /// in the Haskell sources. Not to be confused with [UtxoFailure].
-#[derive(Debug, Clone, Eq, PartialEq)]
+#[derive(Encode, Decode, Debug, Clone, PartialEq, Eq)]
+#[cbor(flat)]
 pub enum UtxosFailure {
-    ValidationTagMismatch(IsValid, TagMismatchDescription),
-    CollectErrors(CollectError),
+    #[n(0)]
+    ValidationTagMismatch(#[n(0)] IsValid, #[n(1)] TagMismatchDescription),
+    #[n(1)]
+    CollectErrors(#[n(0)] CollectError),
 }
 
 #[derive(Encode, Decode, Debug, Clone, Eq, PartialEq)]
